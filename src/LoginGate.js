@@ -12,6 +12,7 @@ export default function LoginGate() {
     e.preventDefault();
     if (input === PASSWORD) {
       setError('');
+      localStorage.setItem('authenticated', 'true');
       navigate('/'); // Redirect to home page after login
     } else {
       setError('Incorrect password, try again.');
