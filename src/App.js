@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LoginGate from './LoginGate';
 import Home from './Home';
+import ListingAgreementForm from './ListingAgreementForm';
 
 // Simple auth check using localStorage
 const isAuthenticated = () => {
@@ -26,7 +27,14 @@ function App() {
             </PrivateRoute>
           }
         />
-        {/* Optionally add more protected routes here */}
+        <Route
+          path="/listing-agreement"
+          element={
+            <PrivateRoute>
+              <ListingAgreementForm />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Router>
   );
