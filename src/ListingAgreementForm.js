@@ -75,7 +75,7 @@ export default function ListingAgreementForm() {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:5000/generate', {
+      const response = await fetch('https://real-contract-backend.onrender.com', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
