@@ -68,6 +68,8 @@ export default function ListingAgreementForm() {
     return initial;
   });
 
+  const [loading, setLoading] = useState(false); // NEW
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -75,6 +77,7 @@ export default function ListingAgreementForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // show loading
 
     try {
       const response = await fetch('https://real-contract-backend.onrender.com/generate', {
@@ -99,6 +102,8 @@ export default function ListingAgreementForm() {
     } catch (err) {
       alert("Error: " + err.message);
       console.error(err);
+    } finally {
+      setLoading(false); // hide loading
     }
   };
 
@@ -135,17 +140,55 @@ export default function ListingAgreementForm() {
                 padding: 12,
                 borderRadius: 6,
                 border: '1px solid #ddd',
-                boxShadow: 'none',
-                }}
+              }}
             >
               {fieldExamples[key]}
             </div>
           </div>
         ))}
-        <button type="submit" style={{ marginTop: 20 }}>
-          Generate Document
+        <button 
+          type="submit" 
+          style={{ marginTop: 20, padding: "10px 20px" }}
+          disabled={loading}
+        >
+          {loading ? "Generating..." : "Generate Document"}
         </button>
       </form>
+
+      {/* Full screen overlay with spinner */}
+      {loading && (
+        <div style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          backgroundColor: "rgba(0,0,0,0.5)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          zIndex: 9999
+        }}>
+          <div style={{
+            background: "#fff",
+            padding: "30px",
+            borderRadius: "10px",
+            boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
+            textAlign: "center"
+          }}>
+            <div style={{
+              border: "4px solid #f3f3f3",
+              borderTop: "4px solid #3498db",
+              borderRadius: "50%",
+              width: "40px",
+              height: "40px",
+              animation: "spin 1s linear infinite",
+              margin: "0 auto 15px"
+            }}></div>
+            <p>Generating your document...</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
