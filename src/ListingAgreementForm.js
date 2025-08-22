@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 
 const fieldLabels = {
   Owner: "Owner",
@@ -67,6 +68,12 @@ export default function ListingAgreementForm() {
     Object.keys(fieldLabels).forEach(key => (initial[key] = ''));
     return initial;
   });
+
+  useEffect(() => {
+  fetch("https://real-contract-backend.onrender.com/health")
+    .then(() => console.log("Backend warmed up"))
+    .catch(() => console.log("Backend warming up..."));
+}, []);
 
   const [loading, setLoading] = useState(false); // NEW
 
