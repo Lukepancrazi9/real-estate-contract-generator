@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 const fieldLabels = {
   Owner: "Owner",
+  OwnerDesignation: "Owner Designation",
   OwnerStreet: "Owner Street Address",
   OwnerCityStateZip: "Owner City, State and Zip",
   OwnerPhone: "Owner Phone",
@@ -22,8 +23,9 @@ const fieldExamples = {
   Owner: `{INSERT OWNER NAME in upper case
 followed by a comma and designation in lower
 case}
-Examples: JOHN DOE AND JANE DOE,
-husband and wife; ABC CORPORATION, INC.,
+Examples: JOHN DOE AND JANE DOE,`,
+  OwnerDesignation: `{insert Owner Designation}
+Examples: husband and wife; ABC CORPORATION, INC.,
 an Arizona corporation; ABC, LLC, an Arizona
 limited liability company, ABC TRUST dated
 January 1, 2000`,
